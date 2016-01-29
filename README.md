@@ -22,18 +22,19 @@ The function is `get_peat(type = "all", only_meta = TRUE, metadata = NULL)`
 #load function
 source("get_peat_prop_data.R")
 
-# Get data
+# Get data (slow - a simple counter shows the progress)
 dat <- get_peat(type = "all", only_meta = FALSE, metadata = NULL)
 
 # Plot bulk density versus peat depth
 library(ggplot2)
 library(grid)
 #number cores within sites
-dat$id <- with(dat, ave(as.numeric(core_name), factor(site_name), FUN=function(x) as.numeric(factor(x))))
-ggplot(gg5[order(dat$core_name, dat$depth),], aes(x = (bulk_density_g_cm3*1000), y = depth ,  colour = factor(id))) + 
+dat$id <- with(dat, ave(as.numeric(factor(core_name)), factor(site_name), FUN=function(x) as.numeric(factor(x))))
+
+ggplot(dat[order(dat$core_name, dat$depth),], aes(x = (bulk_density_g_cm3*1000), y = depth ,  colour = factor(id))) + 
   geom_path() + 
   geom_point() +
-  scale_y_reverse(limits=c(300,0)) +
+  scale_y_reverse(limits=c(500,0)) +
   xlim(0,300) +
   ylab("Depth (cm)") +
   xlab(expression(paste("Bulk Density (kg ",m^-3,")" ))) +

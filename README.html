@@ -70,24 +70,27 @@ img {
 <div id="usage" class="section level3">
 <h3>Usage</h3>
 <p>The function is <code>get_peat(type = &quot;all&quot;, only_meta = TRUE, metadata = NULL)</code></p>
-<p>-<code>type</code> makes it possible to subset the data on peatland type. All data - <code>&quot;all&quot;</code>, Bogs - <code>&quot;bog&quot;</code>, Rich fens - <code>&quot;rich&quot;</code>, Poor fens - <code>&quot;poor&quot;</code>, Permafrost - <code>&quot;perma&quot;</code>, Kettle holes - <code>&quot;kettle&quot;</code> (no available sites though), Other - <code>&quot;other&quot;</code></p>
-<p>-<code>only_meta</code> If TRUE only meta data is extracted, FALSE will download the data.</p>
-<p>-<code>metadata</code> If you have extracted only metadata and want to use this object to also get the data.</p>
+<ul>
+<li><p><code>type</code> makes it possible to subset the data on peatland type. All data - <code>&quot;all&quot;</code>, Bogs - <code>&quot;bog&quot;</code>, Rich fens - <code>&quot;rich&quot;</code>, Poor fens - <code>&quot;poor&quot;</code>, Permafrost - <code>&quot;perma&quot;</code>, Kettle holes - <code>&quot;kettle&quot;</code> (no available sites though), Other - <code>&quot;other&quot;</code></p></li>
+<li><p><code>only_meta</code> If TRUE only meta data is extracted, FALSE will download the data.</p></li>
+<li><p><code>metadata</code> If you have extracted only metadata and want to use this object to also get the data.</p></li>
+</ul>
 <pre class="R"><code>#load function
 source(&quot;get_peat_prop_data.R&quot;)
 
-# Get data
+# Get data (slow - a simple counter shows the progress)
 dat &lt;- get_peat(type = &quot;all&quot;, only_meta = FALSE, metadata = NULL)
 
 # Plot bulk density versus peat depth
 library(ggplot2)
 library(grid)
 #number cores within sites
-dat$id &lt;- with(dat, ave(as.numeric(core_name), factor(site_name), FUN=function(x) as.numeric(factor(x))))
-ggplot(gg5[order(dat$core_name, dat$depth),], aes(x = (bulk_density_g_cm3*1000), y = depth ,  colour = factor(id))) + 
+dat$id &lt;- with(dat, ave(as.numeric(factor(core_name)), factor(site_name), FUN=function(x) as.numeric(factor(x))))
+
+ggplot(dat[order(dat$core_name, dat$depth),], aes(x = (bulk_density_g_cm3*1000), y = depth ,  colour = factor(id))) + 
   geom_path() + 
   geom_point() +
-  scale_y_reverse(limits=c(300,0)) +
+  scale_y_reverse(limits=c(500,0)) +
   xlim(0,300) +
   ylab(&quot;Depth (cm)&quot;) +
   xlab(expression(paste(&quot;Bulk Density (kg &quot;,m^-3,&quot;)&quot; ))) +
