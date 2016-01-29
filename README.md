@@ -41,3 +41,4 @@ ggplot(dat[order(dat$core_name, dat$depth),], aes(x = (bulk_density_g_cm3*1000),
   facet_wrap(~site_name) +
   guides(colour=FALSE)
 ```
+![](depth_BD.png?raw=true)
