@@ -1,28 +1,27 @@
 # peatProp
-A simple web scrape function to get peat properties data from the Holocene Perspective on Peatland Biogeochemistry database [**https://peatlands.lehigh.edu/**](https://peatlands.lehigh.edu/). It is a bit slow and clunky but should do the job.
+Updated: 2016-01-29
+
+A simple web scrape function to get peat properties data from the [**Holocene Perspective on Peatland Biogeochemistry database**](https://peatlands.lehigh.edu/). It is a bit slow and clunky but should do the job.
+
 The data is published in:
 - [**Loisel et al. 2014 The Holocene**](http://hol.sagepub.com/content/24/9/1028)
 
 However, of the 215 sites, only 70 sites are available online.
 
-### Download
-Easiest way to load the function is by using the devtools package.
-```R
-library(devtools)
-source("https://github.com/ggranath/peatProp/blob/master/get_peat_prop_data.R")
-```
-
 ### Usage
 The function is `get_peat(type = "all", only_meta = TRUE, metadata = NULL)`
 
-`type` makes it possible to subset the data on peatland type.
+-`type` makes it possible to subset the data on peatland type.
   All data - `"all"`, Bogs - `"bog"`, Rich fens - `"rich"`, Poor fens - `"poor"`, Permafrost - `"perma"`, Kettle holes - `"kettle"` (no available sites though), Other - `"other"`
  
- `only_meta` If TRUE only meta data is extracted, FALSE will download the data. 
+-`only_meta` If TRUE only meta data is extracted, FALSE will download the data. 
  
- `metadata` If you have extracted only metadata and want to use this object to also get the data.
+-`metadata` If you have extracted only metadata and want to use this object to also get the data.
  
 ```R
+#load function
+source("get_peat_prop_data.R")
+
 # Get data
 dat <- get_peat(type = "all", only_meta = FALSE, metadata = NULL)
 
