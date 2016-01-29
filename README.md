@@ -11,12 +11,12 @@ However, of the 215 sites, only 70 sites are available online.
 ### Usage
 The function is `get_peat(type = "all", only_meta = TRUE, metadata = NULL)`
 
--`type` makes it possible to subset the data on peatland type.
+- `type` makes it possible to subset the data on peatland type.
   All data - `"all"`, Bogs - `"bog"`, Rich fens - `"rich"`, Poor fens - `"poor"`, Permafrost - `"perma"`, Kettle holes - `"kettle"` (no available sites though), Other - `"other"`
  
--`only_meta` If TRUE only meta data is extracted, FALSE will download the data. 
+- `only_meta` If TRUE only meta data is extracted, FALSE will download the data. 
  
--`metadata` If you have extracted only metadata and want to use this object to also get the data.
+- `metadata` If you have extracted only metadata and want to use this object to also get the data.
  
 ```R
 #load function
